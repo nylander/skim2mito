@@ -1,9 +1,38 @@
-# skim2mito
+# skim2mito -- with NRM profile
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://img.shields.io/badge/DOI-10.1101%2F2023.08.11.552985-blue)](https://doi.org/10.1111/1755-0998.14036)
 
-**skim2mito** is a snakemake pipeline for the batch assembly, annotation, and phylogenetic analysis of mitochondrial genomes from low coverage genome skims. The pipeline was designed to work with sequence data from museum collections. However, it should also work with genome skims from recently collected samples.
+**skim2mito** is a snakemake pipeline for the batch assembly, annotation, and
+phylogenetic analysis of mitochondrial genomes from low coverage genome skims.
+The pipeline was designed to work with sequence data from museum collections.
+However, it should also work with genome skims from recently collected samples.
+
+![Workflow overview](workflow/assets/img/rulegraph.png)
+
+## TL;DR
+
+These instructions are amended for the NRM branch by JN.
+
+Here we skip the alignment and tree steps.
+
+We use (require) a personal API key from NCBI (passed to argument `user_api`
+below). See <https://support.nlm.nih.gov/kbArticle/?pn=KA-05317>
+
+```bash
+$ git clone https://github.com/nylander/skim2mito
+$ cd skim2mito
+$ git checkout JN
+$ mamba create -n skim2mito_env -f workflow/envs/conda_env.yaml
+# Edit `config/samples.csv`
+# Check `config/config.yaml`
+$ screen -S skim2mito
+$ mamba activate skim2mito_env
+$ snakemake --cores 4 --use-conda \
+    --profile workflow/profiles/nrm \
+    --config user_api="XXXX" \
+    --omit-from mafft
+```
 
 ## Contents
  - [Setup](#setup)
@@ -22,25 +51,33 @@
 
 The pipeline is written in Snakemake and uses conda to install the necessary tools.
 
-It is *strongly recommended* to install conda using Mambaforge. See details here https://snakemake.readthedocs.io/en/stable/getting_started/installation.html
+It is *strongly recommended* to install conda using Mambaforge. See details
+here
+<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>
 
-Once conda is installed, you can pull the github repo and set up the base conda environment.
+Once conda is installed, you can pull the github repo and set up the base conda
+environment.
 
 ```bash
 # get github repo
-git clone https://github.com/o-william-white/skim2mito
+git clone https://github.com/nylander/skim2mito
 
 # change dir
 cd skim2mito
 
+# checkout NRM branch
+git checkout NRM
+
 # setup conda env
-conda env create -n skim2mito_env -f workflow/envs/conda_env.yaml
+mamba create -n skim2mito_env -f workflow/envs/conda_env.yaml
 
 # set channel priority to avoid warning messages from snakemake
 conda config --set channel_priority strict
 ```
 
-If you need to install the conda environment to a specific location, use the following example, where the prefix argument can be updated to include a specific path:
+If you need to install the conda environment to a specific location, use the
+following example, where the prefix argument can be updated to include a
+specific path:
 
 ```bash
 conda env create -n skim2mito_env --prefix /your_path/skim2mito_env -f workflow/envs/conda_env.yaml
@@ -54,20 +91,36 @@ conda env create -n skim2mito_env --prefix /your_path/skim2mito_env -f workflow/
 
 ## Example data
 
-Before you run your own data, it is recommended to run the example datasets provided. This will confirm there are no user-specific issues with the setup and it also installs all the dependencies. The example data includes simulated mitochondrial data from 25 different butterfly species.
+Before you run your own data, it is recommended to run the example datasets
+provided. This will confirm there are no user-specific issues with the setup
+and it also installs all the dependencies. The example data includes simulated
+mitochondrial data from 25 different butterfly species.
 
-To run the example data, use the code below. The first time you run the pipeline, it will take some time to install each of the conda environments, so it is a good time to take a tea break :).
+To run the example data, use the code below. The first time you run the
+pipeline, it will take some time to install each of the conda environments, so
+it is a good time to take a tea break :).
+
 ```bash
-conda activate skim2mito_env
+mamba activate skim2mito_env
 
 snakemake --profile workflow/profiles/test
 ```
 
-The resources requested for the test data can be found in the snakemake profile `workflow/profiles/test/config.yaml`. This requires 16G of memory and 4 cores, with the analysis taking approximately three hours. I have purposely tried to keep the memory requirements low so it can be run on most systems. However, the runtime can be improved by adjusting the profile to allow more memory and cores.
+The resources requested for the test data can be found in the snakemake profile
+`workflow/profiles/test/config.yaml`. This requires 16G of memory and 4 cores,
+with the analysis taking approximately three hours. I have purposely tried to
+keep the memory requirements low so it can be run on most systems. However, the
+runtime can be improved by adjusting the profile to allow more memory and
+cores.
 
 ## Example data with SLURM
 
-If you have access to High Performance Computing Facilities (HPC) with a job scheduler, you can submit jobs that each rule is submitted as a separate job with resources you can specify. The advantage of this approach is that you often have access to a larger computational resources and many jobs can be run simultaneously. For example, you can submit the test data to a SLURM job scheduler with the following code and it completes in approximately one hour.
+If you have access to High Performance Computing Facilities (HPC) with a job
+scheduler, you can submit jobs that each rule is submitted as a separate job
+with resources you can specify. The advantage of this approach is that you
+often have access to a larger computational resources and many jobs can be run
+simultaneously. For example, you can submit the test data to a SLURM job
+scheduler with the following code and it completes in approximately one hour.
 
 ```bash
 snakemake --profile workflow/profiles/slurm
@@ -79,16 +132,26 @@ snakemake --profile workflow/profiles/slurm
 </div>
 <br/>
 
-## Example data with go_fetch
+## Example data with go\_fetch
 
-The example data above uses mitochondrial references provided with the test dataset. However, skim2mito can also identify and download reference data using go_fetch.py (https://github.com/o-william-white/go_fetch), a python script which searches NCBI for mitochondrial references and downloads them in the correct format for getorganelle.
+The example data above uses mitochondrial references provided with the test
+dataset. However, skim2mito can also identify and download reference data using
+`go_fetch.py` (`https://github.com/o-william-white/go_fetch`), a python script
+which searches NCBI for mitochondrial references and downloads them in the
+correct format for getorganelle.
 
-To rerun the test data using the go_fetch.py option to download references, run the example below. **Note that you need to change the user email and API key**. The email and API key is required by the Bio Entrez package to fetch reference sequences from NCBI. It is only necessary to provide the user email and API key if the go_fetch step is used to get reference sequences from NCBI. If you use a custom reference, it is not necessary.  
+To rerun the test data using the `go_fetch.py` option to download references, run
+the example below. **Note that you need to change the user email and API key**.
+The email and API key is required by the Bio Entrez package to fetch reference
+sequences from NCBI. It is only necessary to provide the user email and API key
+if the `go_fetch` step is used to get reference sequences from NCBI. If you use a
+custom reference, it is not necessary
 
-You can find how to get an API key for NCBI here https://support.nlm.nih.gov/kbArticle/?pn=KA-05317
+You can find how to get an API key for NCBI here
+<https://support.nlm.nih.gov/kbArticle/?pn=KA-05317>
 
 ```
-conda activate skim2mito_env
+mamba activate skim2mito_env
 
 snakemake --cores 4 --use-conda \
    --config go_reference=go_fetch \
@@ -98,9 +161,16 @@ snakemake --cores 4 --use-conda \
 
 ## Input
 
-Snakemake requires a `config.yaml` and `samples.csv` to define input parameters and sequence data for each sample. 
+Snakemake requires a `config.yaml` and `samples.csv` to define input parameters
+and sequence data for each sample.
 
-For the example data provided, the config file is located here `config/config.yaml` and it looks like this:
+Note: If you are unsure about which forward and reverse reads are use, those
+could be checked by the herlper script
+[`get_adapters_from_fastq.sh`](workflow/scripts/get_adapters_from_fastq.sh)
+
+For the example data provided, the config file is located here
+`config/config.yaml` and it looks like this:
+
 ```yaml
 # path to sample sheet csv with columns for ID,forward,reverse,taxid,seed,gene
 samples: config/samples.csv
@@ -145,10 +215,12 @@ plot_height: 20
 plot_width: 20
 ```
 
-The example samples.csv file is located here `config/samples.csv` and it looks like this (note that the seed and gene columns are only required if the custom getorganelle database option is specified in the config file):
+The example samples.csv file is located here `config/samples.csv` and it looks
+like this (note that the seed and gene columns are only required if the custom
+getorganelle database option is specified in the config file):
 
 
- ID | forward | reverse | taxid | seed | gene 
+ ID | forward | reverse | taxid | seed | gene
 ----|---------|---------|-------|------|------
 Adelpha_iphiclus | .test/reads/Adelpha_iphiclus_1.fq.gz | .test/reads/Adelpha_iphiclus_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
 Anartia_jatrophae_saturata | .test/reads/Anartia_jatrophae_saturata_1.fq.gz | .test/reads/Anartia_jatrophae_saturata_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
@@ -176,7 +248,6 @@ Smyrna_blomfildia | .test/reads/Smyrna_blomfildia_1.fq.gz | .test/reads/Smyrna_b
 Tacola_larymna | .test/reads/Tacola_larymna_1.fq.gz | .test/reads/Tacola_larymna_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
 Yoma_algina | .test/reads/Yoma_algina_1.fq.gz | .test/reads/Yoma_algina_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
 
-
 <br/>
 <div align="right">
     <b><a href="#skim2mito">↥ back to top</a></b>
@@ -185,7 +256,8 @@ Yoma_algina | .test/reads/Yoma_algina_1.fq.gz | .test/reads/Yoma_algina_2.fq.gz 
 
 ## Output
 
-All output files are saved to the `results` directory. Below is a table summarising all of the output files generated by the pipeline.
+All output files are saved to the `results` directory. Below is a table
+summarising all of the output files generated by the pipeline.
 
 | Directory             | Description               |
 |-----------------------|---------------------------|
@@ -202,7 +274,7 @@ All output files are saved to the `results` directory. Below is a table summaris
 | assess_assembly       | Plots of annotations, mean depth, GC content and proportion mismatches |
 | annotations           | Annotation outputs of mitos |
 | summary               | Summary per sample (seqkit stats), contig (GC content, length, coverage, taxonomy and annotations) and annotated gene counts |
-| annotated_genes  | Unaligned fasta files of annotated genes identified across all samples |
+| annotated_genes       | Unaligned fasta files of annotated genes identified across all samples |
 | mafft                 | Mafft aligned fasta files of annotated genes identified across all samples |
 | mafft_filtered        | Mafft aligned fasta files after the removal of sequences based on a missing data threshold |
 | alignment_trim        | Ambiguous parts of alignment removed using either gblocks or clipkit |
@@ -218,11 +290,21 @@ All output files are saved to the `results` directory. Below is a table summaris
 
 ## Filtering contaminants
 
-If you are working with museum collections, it is possible that you may assemble and annotate sequences from contaminant/non-target species. *Contaminant sequences can be identified based on the blast search output or unusual placement in the phylogenetic trees* (see blobtools and plot_tree outputs). 
+If you are working with museum collections, it is possible that you may
+assemble and annotate sequences from contaminant/non-target species.
+*Contaminant sequences can be identified based on the blast search output or
+unusual placement in the phylogenetic trees* (see blobtools and plot_tree
+outputs).
 
-A supplementary python script `format_alignments.py` is provided to remove putative contaminants from alignments, and format the alignments for downstream phylogenetic analysis.
+A supplementary python script `format_alignments.py` is provided to remove
+putative contaminants from alignments, and format the alignments for downstream
+phylogenetic analysis.
 
-For example, let's say we wanted to remove all sequences from the sample "Kallima_paralekta" and atp6 gene sequences, you could run the script as shown below. The script works by identifying and removing sequences that have names with  `Kallima_paralekta` or `atp6` in the sequence names. The filtered alignments are written to a new output directory `filter_alignments_output`.
+For example, let's say we wanted to remove all sequences from the sample
+"Kallima_paralekta" and atp6 gene sequences, you could run the script as shown
+below. The script works by identifying and removing sequences that have names
+with  `Kallima_paralekta` or `atp6` in the sequence names. The filtered
+alignments are written to a new output directory `filter_alignments_output`.
 
 ```bash
 python workflow/scripts/format_alignments.py  \
@@ -231,7 +313,10 @@ python workflow/scripts/format_alignments.py  \
    --output filter_alignments_output
 ```
 
-*Note that the output fasta files have been reformatted so each alignment file is named after the gene and each sequence is named after the sample.* This is useful if you would like to run our related pipeline **gene2phylo** for further phylogenetic analyses.
+*Note that the output fasta files have been reformatted so each alignment file
+is named after the gene and each sequence is named after the sample.* This is
+useful if you would like to run our related pipeline **gene2phylo** for further
+phylogenetic analyses.
 
 <br/>
 <div align="right">
@@ -241,7 +326,10 @@ python workflow/scripts/format_alignments.py  \
 
 ## Assembly and annotation only
 
-If you are only interested in the assembly of mitochondrial sequences and annotation of genes without the phylogenetic analysis, you can stop the pipeline from running the gene alignment and phylogenetic analyses using the `--omit-from` parameter.
+If you are only interested in the assembly of mitochondrial sequences and
+annotation of genes without the phylogenetic analysis, you can stop the
+pipeline from running the gene alignment and phylogenetic analyses using the
+`--omit-from` parameter.
 
 ```bash
 snakemake --cores 4 --use-conda --config user_email=user@example_email.com --omit-from mafft
@@ -255,17 +343,28 @@ snakemake --cores 4 --use-conda --config user_email=user@example_email.com --omi
 
 ## Running your own data
 
-The first thing you need to do is generate your own config.yaml and samples.csv files, using the files provided as a template.
+The first thing you need to do is generate your own config.yaml and samples.csv
+files, using the files provided as a template.
 
-GetOrganelle requires reference data in the format of seed and gene reference fasta files. You can generate these files yourself, or use go_fetch.py https://github.com/o-william-white/go_fetch to download and format reference data formatted for GetOrganelle.
+GetOrganelle requires reference data in the format of seed and gene reference
+fasta files. You can generate these files yourself, or use go_fetch.py
+<https://github.com/o-william-white/go_fetch> to download and format reference
+data formatted for GetOrganelle.
 
-go_fetch.py works by searching NCBI based on the NCBI taxonomy specified by the taxid column in the samples.csv file. Note that the seed and gene columns in the samples.csv file are only required if you want to provide your own custom GetOrganelle seed and gene reference databases. 
+`go_fetch.py` works by searching NCBI based on the NCBI taxonomy specified by the
+taxid column in the samples.csv file. Note that the seed and gene columns in
+the samples.csv file are only required if you want to provide your own custom
+GetOrganelle seed and gene reference databases.
 
-You can use the default reference data for GetOrganelle, but I would recommend using custom reference databases where possible. See here for details of how to set up your own databases https://github.com/Kinggerm/GetOrganelle/wiki/FAQ#how-to-assemble-a-target-organelle-genome-using-my-own-reference
+You can use the default reference data for GetOrganelle, but I would recommend
+using custom reference databases where possible. See here for details of how to
+set up your own databases
+<https://github.com/Kinggerm/GetOrganelle/wiki/FAQ#how-to-assemble-a-target-organelle-genome-using-my-own-reference>
 
 ## Getting help
 
-If you have any questions, please do get in touch in the issues or by email o.william.white@gmail.com
+If you have any questions, please do get in touch in the issues or by email
+o.william.white@gmail.com
 
 <br/>
 <div align="right">
@@ -275,7 +374,8 @@ If you have any questions, please do get in touch in the issues or by email o.wi
 
 ## Citations
 
-If you use the pipeline, please cite our bioarxiv preprint: https://doi.org/10.1101/2023.08.11.552985
+If you use the pipeline, please cite our bioarxiv preprint:
+https://doi.org/10.1101/2023.08.11.552985
 
 Since the pipeline is a wrapper for several other bioinformatic tools we also ask that you cite the tools used by the pipeline:
  - Fastqc https://github.com/s-andrews/FastQC
