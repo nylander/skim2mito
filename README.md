@@ -220,33 +220,33 @@ like this (note that the seed and gene columns are only required if the custom
 getorganelle database option is specified in the config file):
 
 
- ID | forward | reverse | taxid | seed | gene
-----|---------|---------|-------|------|------
-Adelpha_iphiclus | .test/reads/Adelpha_iphiclus_1.fq.gz | .test/reads/Adelpha_iphiclus_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Anartia_jatrophae_saturata | .test/reads/Anartia_jatrophae_saturata_1.fq.gz | .test/reads/Anartia_jatrophae_saturata_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Araschnia_levana | .test/reads/Araschnia_levana_1.fq.gz | .test/reads/Araschnia_levana_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Auzakia_danava | .test/reads/Auzakia_danava_1.fq.gz | .test/reads/Auzakia_danava_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Baeotus_beotus | .test/reads/Baeotus_beotus_1.fq.gz | .test/reads/Baeotus_beotus_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Catacroptera_cloanthe | .test/reads/Catacroptera_cloanthe_1.fq.gz | .test/reads/Catacroptera_cloanthe_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Chalinga_pratti | .test/reads/Chalinga_pratti_1.fq.gz | .test/reads/Chalinga_pratti_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Diaethria_gabaza_eupepla | .test/reads/Diaethria_gabaza_eupepla_1.fq.gz | .test/reads/Diaethria_gabaza_eupepla_2.fq.gz | 127268 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Doleschallia_melana | .test/reads/Doleschallia_melana_1.fq.gz | .test/reads/Doleschallia_melana_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Eurema_blanda | .test/reads/Eurema_blanda_1.fq.gz | .test/reads/Eurema_blanda_2.fq.gz | 42450 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Hypolimnas_usambara | .test/reads/Hypolimnas_usambara_1.fq.gz | .test/reads/Hypolimnas_usambara_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Junonia_villida | .test/reads/Junonia_villida_1.fq.gz | .test/reads/Junonia_villida_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Kallima_paralekta | .test/reads/Kallima_paralekta_1.fq.gz | .test/reads/Kallima_paralekta_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Kallimoides_rumia | .test/reads/Kallimoides_rumia_1.fq.gz | .test/reads/Kallimoides_rumia_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Litinga_cottini | .test/reads/Litinga_cottini_1.fq.gz | .test/reads/Litinga_cottini_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Mallika_jacksoni | .test/reads/Mallika_jacksoni_1.fq.gz | .test/reads/Mallika_jacksoni_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Moduza_procris | .test/reads/Moduza_procris_1.fq.gz | .test/reads/Moduza_procris_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Parasarpa_zayla | .test/reads/Parasarpa_zayla_1.fq.gz | .test/reads/Parasarpa_zayla_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Phaedyma_columella | .test/reads/Phaedyma_columella_1.fq.gz | .test/reads/Phaedyma_columella_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Precis_pelarga | .test/reads/Precis_pelarga_1.fq.gz | .test/reads/Precis_pelarga_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Protogoniomorpha_temora | .test/reads/Protogoniomorpha_temora_1.fq.gz | .test/reads/Protogoniomorpha_temora_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Salamis_cacta | .test/reads/Salamis_cacta_1.fq.gz | .test/reads/Salamis_cacta_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Smyrna_blomfildia | .test/reads/Smyrna_blomfildia_1.fq.gz | .test/reads/Smyrna_blomfildia_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Tacola_larymna | .test/reads/Tacola_larymna_1.fq.gz | .test/reads/Tacola_larymna_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
-Yoma_algina | .test/reads/Yoma_algina_1.fq.gz | .test/reads/Yoma_algina_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta
+|  ID | forward | reverse | taxid | seed | gene |
+| ----|---------|---------|-------|------|------|
+| Adelpha_iphiclus | .test/reads/Adelpha_iphiclus_1.fq.gz | .test/reads/Adelpha_iphiclus_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Anartia_jatrophae_saturata | .test/reads/Anartia_jatrophae_saturata_1.fq.gz | .test/reads/Anartia_jatrophae_saturata_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Araschnia_levana | .test/reads/Araschnia_levana_1.fq.gz | .test/reads/Araschnia_levana_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Auzakia_danava | .test/reads/Auzakia_danava_1.fq.gz | .test/reads/Auzakia_danava_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Baeotus_beotus | .test/reads/Baeotus_beotus_1.fq.gz | .test/reads/Baeotus_beotus_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Catacroptera_cloanthe | .test/reads/Catacroptera_cloanthe_1.fq.gz | .test/reads/Catacroptera_cloanthe_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Chalinga_pratti | .test/reads/Chalinga_pratti_1.fq.gz | .test/reads/Chalinga_pratti_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Diaethria_gabaza_eupepla | .test/reads/Diaethria_gabaza_eupepla_1.fq.gz | .test/reads/Diaethria_gabaza_eupepla_2.fq.gz | 127268 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Doleschallia_melana | .test/reads/Doleschallia_melana_1.fq.gz | .test/reads/Doleschallia_melana_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Eurema_blanda | .test/reads/Eurema_blanda_1.fq.gz | .test/reads/Eurema_blanda_2.fq.gz | 42450 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Hypolimnas_usambara | .test/reads/Hypolimnas_usambara_1.fq.gz | .test/reads/Hypolimnas_usambara_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Junonia_villida | .test/reads/Junonia_villida_1.fq.gz | .test/reads/Junonia_villida_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Kallima_paralekta | .test/reads/Kallima_paralekta_1.fq.gz | .test/reads/Kallima_paralekta_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Kallimoides_rumia | .test/reads/Kallimoides_rumia_1.fq.gz | .test/reads/Kallimoides_rumia_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Litinga_cottini | .test/reads/Litinga_cottini_1.fq.gz | .test/reads/Litinga_cottini_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Mallika_jacksoni | .test/reads/Mallika_jacksoni_1.fq.gz | .test/reads/Mallika_jacksoni_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Moduza_procris | .test/reads/Moduza_procris_1.fq.gz | .test/reads/Moduza_procris_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Parasarpa_zayla | .test/reads/Parasarpa_zayla_1.fq.gz | .test/reads/Parasarpa_zayla_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Phaedyma_columella | .test/reads/Phaedyma_columella_1.fq.gz | .test/reads/Phaedyma_columella_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Precis_pelarga | .test/reads/Precis_pelarga_1.fq.gz | .test/reads/Precis_pelarga_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Protogoniomorpha_temora | .test/reads/Protogoniomorpha_temora_1.fq.gz | .test/reads/Protogoniomorpha_temora_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Salamis_cacta | .test/reads/Salamis_cacta_1.fq.gz | .test/reads/Salamis_cacta_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Smyrna_blomfildia | .test/reads/Smyrna_blomfildia_1.fq.gz | .test/reads/Smyrna_blomfildia_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Tacola_larymna | .test/reads/Tacola_larymna_1.fq.gz | .test/reads/Tacola_larymna_2.fq.gz | 100750 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
+| Yoma_algina | .test/reads/Yoma_algina_1.fq.gz | .test/reads/Yoma_algina_2.fq.gz | 40040 | .test/seed_mitochondrion.fasta | .test/gene_mitochondrion.fasta |
 
 <br/>
 <div align="right">
@@ -293,7 +293,7 @@ summarising all of the output files generated by the pipeline.
 If you are working with museum collections, it is possible that you may
 assemble and annotate sequences from contaminant/non-target species.
 *Contaminant sequences can be identified based on the blast search output or
-unusual placement in the phylogenetic trees* (see blobtools and plot_tree
+unusual placement in the phylogenetic trees* (see blobtools and `plot_tree`
 outputs).
 
 A supplementary python script `format_alignments.py` is provided to remove
@@ -301,9 +301,9 @@ putative contaminants from alignments, and format the alignments for downstream
 phylogenetic analysis.
 
 For example, let's say we wanted to remove all sequences from the sample
-"Kallima_paralekta" and atp6 gene sequences, you could run the script as shown
+"`Kallima_paralekta`" and atp6 gene sequences, you could run the script as shown
 below. The script works by identifying and removing sequences that have names
-with  `Kallima_paralekta` or `atp6` in the sequence names. The filtered
+with `Kallima_paralekta` or `atp6` in the sequence names. The filtered
 alignments are written to a new output directory `filter_alignments_output`.
 
 ```bash
@@ -399,3 +399,7 @@ Since the pipeline is a wrapper for several other bioinformatic tools we also as
     <b><a href="#skim2mito">↥ back to top</a></b>
 </div>
 <br/>
+
+## License and copyright
+
+Copyright O. William White, [MIT License](LICENSE.md)
